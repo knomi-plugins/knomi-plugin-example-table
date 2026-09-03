@@ -1,0 +1,8 @@
+{
+  "id": "example-table",
+  "name": "示例表格能力包",
+  "version": "0.1.0",
+  "description": "演示能力包机制：工具返回结构化数据，中枢渲染为表格视图（意图协议 show_view + 视图 Schema）",
+  "entry": "index.js",
+  "permissions": ["agent:tools", "db:read"]
+}
