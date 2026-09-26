@@ -10,7 +10,7 @@
 module.exports = {
   id: 'example-table',
   name: '示例表格能力包',
-  version: '0.1.0',
+  version: '0.1.2',
   description: '演示能力包机制：工具返回结构化数据，中枢渲染为表格视图（show_view）',
 
   async activate(context) {
@@ -25,7 +25,7 @@ module.exports = {
     context.registerAgentTool(
       {
         name: 'list_docs_table',
-        description: '以表格视图展示文档清单（演示意图协议 show_view + 视图 Schema）。用户说"表格形式列出文档"时使用。',
+        description: '演示意图协议 show_view + 视图 Schema 的示例工具（产出为演示数据形态）。仅当用户明确说「演示表格视图」时使用；用户想真实列出/查看自己的文档时不要使用本工具。',
         parameters: {
           type: 'object',
           properties: {},
@@ -33,9 +33,9 @@ module.exports = {
         },
       },
       async () => {
-        const docs = (context.getDocuments && context.getDocuments()) || []
+        const docs = (context.getDocuments && (await context.getDocuments())) || []
         return {
-          output: `已获取 ${docs.length} 篇文档，并以表格视图展示。`,
+          output: `已获取 ${docs.length} 篇文档，并以表格视图展示${docs.length > 50 ? `（视图仅展示前 50 条）` : ''}。`,
           ui: {
             intent: 'show_view',
             view: {
